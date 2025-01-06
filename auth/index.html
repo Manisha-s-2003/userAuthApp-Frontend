@@ -31,33 +31,67 @@
         </aside>
 
         <!-- Main Dashboard Content -->
-        <main class="container-fluid p-4">
-            <!-- Hall Booking Section -->
-            <section id="hall-booking">
-                <h2>Hall Booking</h2>
-                <div class="content mb-3">
-                    <button class="btn btn-primary" onclick="bookHall()">Book a Hall</button>
-                    <div id="hall-list" class="mt-3"></div>
+        <main class="container-fluid p-4 " style="flex-direction: column;">
+  <!-- Hall Booking Section with Card -->
+<section id="hall-booking">
+    <div class="container">
+        <div class="row">
+            <!-- Column for Hall Booking Card -->
+            <div class="col-12 col-sm-6 col-md-4 col-lg-3 mb-3">
+                <div class="card" style="width: 100%;">
+                    <img src="../assets/bookinghall.jpg" class="card-img-top" alt="Hall Booking Image" style="height: 140px; object-fit: cover;">
+                    <div class="card-body">
+                        <h5 class="card-title">Hall Booking</h5>
+                        <p class="card-text">Manage your hall bookings, add new reservations, and view current bookings.</p>
+                        <button class="btn btn-primary" onclick="bookHall()">Book a Hall</button>
+                        <div id="hall-list" class="mt-3"></div>
+                    </div>
                 </div>
-            </section>
+            </div>
+        </div>
+    </div>
+</section>
 
-            <!-- Decoration Section -->
-            <section id="decoration">
-                <h2>Decoration</h2>
-                <div class="content mb-3">
-                    <button class="btn btn-primary" onclick="manageDecorations()">Manage Decorations</button>
-                    <div id="decoration-list" class="mt-3"></div>
+<!-- Decoration Section -->
+<section id="decoration">
+    <div class="container">
+        <div class="row">
+            <!-- Column for Decoration Card -->
+            <div class="col-12 col-sm-6 col-md-4 col-lg-3 mb-3">
+                <div class="card" style="width: 100%;">
+                    <img src="../assets/decoration.jpg" class="card-img-top" alt="Hall Booking Image" style="height: 140px; object-fit: cover;">
+                    <div class="card-body">
+                        <h5 class="card-title">Decoration</h5>
+                        <p class="card-text">Manage your hall bookings, add new reservations, and view current bookings.</p>
+                        <button class="btn btn-primary" onclick="manageDecorations()">Manage Decorations</button>
+                        <div id="decoration-list" class="mt-3"></div>
+                    </div>
                 </div>
-            </section>
+            </div>
+        </div>
+    </div>
+</section>
 
-            <!-- Food Section -->
-            <section id="food">
-                <h2>Food</h2>
-                <div class="content mb-3">
-                    <button class="btn btn-primary" onclick="manageFood()">Manage Food</button>
-                    <div id="food-list" class="mt-3"></div>
+<!-- Food Section -->
+<section id="food">
+    <div class="container">
+        <div class="row">
+            <!-- Column for Food Card -->
+            <div class="col-12 col-sm-6 col-md-4 col-lg-3 mb-3">
+                <div class="card" style="width: 100%;">
+                    <img src="../assets/foodcatering.jpg" class="card-img-top" alt="Food Image" style="height: 140px; object-fit: cover;">
+                    <div class="card-body">
+                        <h5 class="card-title">Food</h5>
+                        <p class="card-text">Manage food orders and view your menu options.</p>
+                        <button class="btn btn-primary" onclick="manageFood()">Manage Food</button>
+                        <div id="food-list" class="mt-3"></div>
+                    </div>
                 </div>
-            </section>
+            </div>
+        </div>
+    </div>
+</section>
+
 
             <!-- Event Overview Section -->
             <section id="event-overview">
