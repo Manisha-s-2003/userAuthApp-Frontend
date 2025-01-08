@@ -46,7 +46,7 @@ document.addEventListener('DOMContentLoaded', () => {
           alert('Login successful!');
           localStorage.setItem('token', response.token);
           // Redirect to a protected page
-          window.location.href = 'index.html';
+          window.location.href = 'dashboard.html';
         } else {
           alert('Error: ' + (response.error || 'Login failed'));
         }

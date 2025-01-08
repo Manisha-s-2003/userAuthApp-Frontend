@@ -5,4 +5,10 @@ body {
   background-position: center;
   }
   
-  
+  .centered-image {
+    width: 100px;
+    height: 90px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}

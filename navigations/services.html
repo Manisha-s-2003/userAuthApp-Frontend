@@ -1,21 +1,38 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Event Services</title>
-    <!-- Bootstrap CSS -->
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Event Management Dashboard</title>
     <link
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="../css/style.css" />
+    
+    <link href="../css/services.css" rel="stylesheet">
 
-  </head>
-  <body>
-    <div class="container my-5">
-      <h1 class="text-center mb-4">Choose Your Event Services</h1>
-      <!-- Event Type Cards -->
+</head>
+<body>
+    <nav>
+      <img src="../assets/logo3.jpg" class="centered-image">
+      <h5>EVENTS MADE EASY</h5>
+
+        <a href="../auth/dashboard.html">Dashboard</a>
+        <a href="../navigations/services.html">Events</a>
+        <a href="#bookings">Bookings</a>
+        <a href="#clients">Clients</a>
+        <a href="#reports">Reports</a>
+        <a href="#settings">Settings</a>
+    </nav>
+
+    <main>
+
+        <header >
+          <h4 >Choose Your Event Type </h4> 
+        </header>
+      
+        <section id="services" class="services">
+          <!-- Event Type Cards -->
       <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
         <!-- Marriage Card -->
         <div class="col">
@@ -23,13 +40,13 @@
             <img
               src="../assets/marriage.jpg"
               class="card-img-top"
-              alt="Marriage Event"
+              alt="Birthday Party"
               style="height: 200px; object-fit: cover"
             />
             <div class="card-body">
-              <h5 class="card-title">Marriage</h5>
+              <h5 class="card-title" style="font-weight: bold;">Marriage</h5>
               <p class="card-text">
-                Plan and organize the perfect marriage event with customized services.
+                Plan and organize the perfect marriage event with customized service
               </p>
               <button
               class="btn btn-warning mt-auto"
@@ -51,11 +68,16 @@
               style="height: 200px; object-fit: cover"
             />
             <div class="card-body">
-              <h5 class="card-title">Reception</h5>
+              <h5 class="card-title" style="font-weight: bold;">Reception</h5>
               <p class="card-text">
                 Host a memorable reception with food, decoration, and more.
               </p>
-              <a href="service-details.html?event=Reception" class="btn btn-warning">Choose this Event</a>
+              <button
+              class="btn btn-warning mt-auto"
+              onclick="receptionevent()"
+            >
+              Choose this event 
+            </button>
             </div>
           </div>
         </div>
@@ -70,11 +92,16 @@
               style="height: 200px; object-fit: cover"
             />
             <div class="card-body">
-              <h5 class="card-title">Birthday Party</h5>
+              <h5 class="card-title" style="font-weight: bold;">Birthday Party</h5>
               <p class="card-text">
                 Organize a fun and vibrant birthday party with decorations and entertainment.
               </p>
-              <a href="service-details.html?event=Birthday Party" class="btn btn-warning">Choose this Event</a>
+              <button
+              class="btn btn-warning mt-auto"
+              onclick="birthdayevent()"
+            >
+              Choose this event 
+            </button>
             </div>
           </div>
         </div>
@@ -89,11 +116,16 @@
               style="height: 200px; object-fit: cover"
             />
             <div class="card-body">
-              <h5 class="card-title">Business Party</h5>
+              <h5 class="card-title"style="font-weight: bold;">Business Party</h5>
               <p class="card-text">
                 Plan a professional business event with catering, decor, and more.
               </p>
-              <a href="service-details.html?event=Business Party" class="btn btn-warning">Choose this Event</a>
+              <button
+              class="btn btn-warning mt-auto"
+              onclick="businessparty()"
+            >
+              Choose this event 
+            </button>
             </div>
           </div>
         </div>
@@ -108,11 +140,16 @@
               style="height: 200px; object-fit: cover"
             />
             <div class="card-body">
-              <h5 class="card-title">Wedding Anniversary</h5>
+              <h5 class="card-title"style="font-weight: bold;">Wedding Anniversary</h5>
               <p class="card-text">
                 Celebrate your wedding anniversary with elegant services tailored to your needs.
               </p>
-              <a href="service-details.html?event=Wedding Anniversary" class="btn btn-warning">Choose this Event</a>
+              <button
+              class="btn btn-warning mt-auto"
+              onclick="weddinganniversary()"
+            >
+              Choose this event 
+            </button>
             </div>
           </div>
         </div>
@@ -127,11 +164,16 @@
               style="height: 200px; object-fit: cover"
             />
             <div class="card-body">
-              <h5 class="card-title">Corporate Event</h5>
+              <h5 class="card-title" style="font-weight: bold;">Corporate Event</h5>
               <p class="card-text">
                 Organize a corporate event with tailored services for meetings and conferences.
               </p>
-              <a href="service-details.html?event=Corporate Event" class="btn btn-warning">Choose this Event</a>
+              <button
+              class="btn btn-warning mt-auto"
+              onclick="corporateevent()"
+            >
+              Choose this event 
+            </button>
             </div>
           </div>
         </div>
@@ -146,11 +188,16 @@
               style="height: 200px; object-fit: cover"
             />
             <div class="card-body">
-              <h5 class="card-title">Social Gathering</h5>
+              <h5 class="card-title"style="font-weight: bold;">Social Gathering</h5>
               <p class="card-text">
                 Host a social gathering with entertainment, food, and great ambiance.
               </p>
-              <a href="service-details.html?event=Social Gathering" class="btn btn-warning">Choose this Event</a>
+              <button
+              class="btn btn-warning mt-auto"
+              onclick="socialgatherings()"
+            >
+              Choose this event 
+            </button>
             </div>
           </div>
         </div>
@@ -165,21 +212,25 @@
               style="height: 200px; object-fit: cover"
             />
             <div class="card-body">
-              <h5 class="card-title">Festival Celebration</h5>
+              <h5 class="card-title" style="font-weight: bold;">Festival Celebration</h5>
               <p class="card-text">
                 Celebrate any festival with appropriate decorations, food, and arrangements.
               </p>
-              <a href="service-details.html?event=Festival Celebration" class="btn btn-warning">Choose this Event</a>
+              <button
+              class="btn btn-warning mt-auto"
+              onclick="festivaloccasion()"
+            >
+              Choose this event 
+            </button>
             </div>
           </div>
-        </div>
-      </div>
-    </div>
+        </section>
 
-    <!-- Bootstrap JS and Dependencies -->
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"></script>
+       
+        <footer>
+            <p>&copy; 2025 Event Management. All rights reserved.</p>
+        </footer>
+    </main>
     <script src="../js/event.js"></script>
-
-  </body>
+</body>
 </html>
