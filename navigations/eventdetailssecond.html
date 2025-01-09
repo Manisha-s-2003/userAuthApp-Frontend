@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Event Service Details</title>
+    <!-- Bootstrap CSS -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../css/style.css" />
+  </head>
+  <body>
+    <div class="container d-flex justify-content-center align-items-center vh-100">
+      <div class="card p-4" style="width: 35rem">
+        <h1 class="text-center mb-4" id="serviceHeading">Service Details</h1>
+
+        <h6 id="eventDetailsDisplay">Loading event details...</h6>
+        
+        <!-- Form to handle multiple pages -->
+        <form id="serviceDetailsForm">
+          <!-- Dynamic service fields will be added here -->
+          <div id="serviceFields"></div>
+
+          <!-- Navigation buttons -->
+          <div class="d-flex justify-content-between mt-4">
+            <button type="button" id="prevBtn" class="btn btn-secondary" disabled>Previous</button>
+            <button type="button" id="nextBtn" class="btn btn-success">Next</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <!-- Bootstrap JS and Dependencies -->
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"></script>
+
+    <script>
+      window.onload = function () {
+        // Retrieve data from localStorage
+        const eventDetails = JSON.parse(localStorage.getItem("eventDetails")) || {};
+        const selectedServices = eventDetails.selectedServices || [];
+        const serviceFieldsContainer = document.getElementById("serviceFields");
+
+        // Display event details
+        document.getElementById("eventDetailsDisplay").innerText = `
+          Event Name: ${eventDetails.eventName || "Unknown Event"}
+          Date: ${eventDetails.eventDate || "N/A"}
+          Time: ${eventDetails.eventTime || "N/A"}
+        `;
+
+        // Set the service heading to display the selected service
+        document.getElementById("serviceHeading").innerText = `
+          Service: ${selectedServices.join(", ") || "None"}
+        `;
+
+        // Initialize the current service page
+        let currentPage = 0;
+
+        // Create separate fields for each service
+        const servicePages = [];
+
+        if (selectedServices.includes("Hall Booking")) {
+          servicePages.push(`
+     
+<div class="form-group mb-3">
+  <label for="hallType" class="form-label">Hall Type</label>
+  <select id="hallType" class="form-select">
+    <option value="Conference">Conference Hall</option>
+    <option value="Banquet">Banquet</option>
+    <option value="Wedding">Wedding Hall</option>
+        <option value="Wedding">Meeting Hall</option>
+            <option value="Wedding">Mini Hall</option>
+
+
+  </select>
+</div>
+
+
+<div class="form-group mb-3">
+  <label for="seatingRange" class="form-label">Seating Range</label>
+  <select id="seatingRange" class="form-select">
+    <option value="50-100">50-100</option>
+    <option value="101-200">101-200</option>
+    <option value="201-300">201-300</option>
+    <option value="301-500">301-500</option>
+    <option value="500+">500+</option>
+  </select>
+</div>
+<div class="form-group mb-3">
+  <label for="parkingAvailability" class="form-label">Parking Availability</label>
+  <select id="parkingAvailability" class="form-select">
+    <option value="Yes">Yes</option>
+    <option value="No">No</option>
+  </select>
+</div>
+<div class="form-group mb-3">
+  <label for="days" class="form-label">Number of Days</label>
+  <input type="number" id="days" class="form-control" placeholder="Enter number of days" min="1" required />
+</div>
+
+<div class="form-group mb-3">
+  <label for="dayType" class="form-label">Day Type</label>
+  <select id="dayType" class="form-select" required onchange="showTimeOptions()">
+    <option value="">Select Day Type</option>
+    <option value="full-day">Full Day</option>
+    <option value="half-day-morning">Half Day</option>  
+    </select>
+</div>
+
+<div id="fullDayOptions" class="form-group mb-3" style="display:none;">
+  <label for="fullDayTime" class="form-label">Full Day Option</label>
+  <select id="fullDayTime" class="form-select">
+    <option value="morning-to-evening">Morning to Evening</option>
+    <option value="afternoon-to-morning">Afternoon to Morning</option>
+  </select>
+</div>
+
+          `);
+        }
+
+        if (selectedServices.includes("Decoration")) {
+          servicePages.push(`
+            <div class="form-group mb-3">
+  <label for="decorationTheme" class="form-label">Decoration Theme</label>
+  <input type="text" id="decorationTheme" class="form-control" placeholder="e.g. Floral, Modern" required />
+</div>
+
+<div class="form-group mb-3">
+  <label for="decorationType" class="form-label">Decoration Type</label>
+  <select id="decorationType" class="form-select" required>
+    <option value="Stage">Stage</option>
+    <option value="Table">Table</option>
+    <option value="Entrance">Entrance</option>
+    <option value="Overall">Overall Event</option>
+  </select>
+</div>
+
+
+
+<div class="form-group mb-3">
+  <label for="flowerChoice" class="form-label">Preferred Flower Type</label>
+  <input type="text" id="flowerChoice" class="form-control" placeholder="e.g. Roses, Orchids" />
+</div>
+
+<div class="form-group mb-3">
+  <label class="form-label">Flower Type</label>
+    <select id="lightingType" class="form-select" required>
+    <option value="Artificial Flower">Artificial Flowers</option>
+    <option value="Original Flower">Original Flowers</option>
+
+  </select>
+ </label>
+</div>
+
+<div class="form-group mb-3">
+  <label for="lightingType" class="form-label">Lighting Type</label>
+  <select id="lightingType" class="form-select" required>
+    <option value="Fairy Lights">Fairy Lights</option>
+    <option value="Spotlights">Spotlights</option>
+    <option value="Ambient">Ambient Lighting</option>
+    <option value="Custom">Custom Lighting</option>
+  </select>
+</div>
+
+
+
+<div class="form-group mb-3">
+  <label for="specialRequests" class="form-label">Special Requests</label>
+  <textarea id="specialRequests" class="form-control" rows="3" placeholder="Enter any special requests for the decoration"></textarea>
+</div>
+
+          `);
+        }
+
+        if (selectedServices.includes("Food Catering")) {
+          servicePages.push(`
+            <div class="form-group mb-3">
+              <label for="menuType" class="form-label">Menu Type</label>
+              <select id="menuType" class="form-select">
+                <option value="Vegetarian">Vegetarian</option>
+                <option value="Non-Vegetarian">Non-Vegetarian</option>
+                <option value="Mixed">Mixed</option>
+              </select>
+            </div>
+            <div class="form-group mb-3">
+              <label for="menuItems" class="form-label">Menu Items</label>
+              <textarea id="menuItems" class="form-control" rows="3" placeholder="Enter menu items"></textarea>
+            </div>
+          `);
+        }
+
+        if (selectedServices.includes("Photography")) {
+          servicePages.push(`
+            <div class="form-group mb-3">
+              <label for="photoPackage" class="form-label">Photography Package</label>
+              <select id="photoPackage" class="form-select">
+                <option value="Basic">Basic</option>
+                <option value="Standard">Standard</option>
+                <option value="Premium">Premium</option>
+              </select>
+            </div>
+          `);
+        }
+
+        // Function to display the current page of service fields
+        function showPage(pageIndex) {
+          serviceFieldsContainer.innerHTML = servicePages[pageIndex];
+          document.getElementById("prevBtn").disabled = pageIndex === 0;
+          document.getElementById("nextBtn").disabled = pageIndex === servicePages.length - 1;
+
+          // Update the heading with the current service
+          document.getElementById("serviceHeading").innerText = `
+             ${selectedServices[pageIndex] || "None"}
+          `;
+        }
+
+        // Show the first page
+        showPage(currentPage);
+
+        // Handle Next and Previous button clicks
+        document.getElementById("nextBtn").onclick = function () {
+          if (currentPage < servicePages.length - 1) {
+            currentPage++;
+            showPage(currentPage);
+          }
+        };
+
+        document.getElementById("prevBtn").onclick = function () {
+          if (currentPage > 0) {
+            currentPage--;
+            showPage(currentPage);
+          }
+        };
+
+        // Handle form submission
+        document.getElementById("serviceDetailsForm").addEventListener("submit", function (e) {
+          e.preventDefault();
+
+          // Gather service-specific data
+          const serviceDetails = {};
+
+          if (document.getElementById("hallType")) {
+            serviceDetails.hallType = document.getElementById("hallType").value;
+          }
+          if (document.getElementById("dayType")){
+        
+    const dayType = document.getElementById('dayType').value;
+    const fullDayOptions = document.getElementById('fullDayOptions');
+    
+    if (dayType === 'full-day') {
+      fullDayOptions.style.display = 'block'; // Show full day options
+    } else {
+      fullDayOptions.style.display = 'none'; // Hide full day options
+    }
+  }
+
+         
+          
+          if (document.getElementById("decorationTheme")) {
+            serviceDetails.decorationTheme = document.getElementById("decorationTheme").value;
+          }
+          if (document.getElementById("menuType")) {
+            serviceDetails.menuType = document.getElementById("menuType").value;
+            serviceDetails.menuItems = document.getElementById("menuItems").value;
+          }
+          if (document.getElementById("photoPackage")) {
+            serviceDetails.photoPackage = document.getElementById("photoPackage").value;
+          }
+
+          // Save service details to localStorage or send to backend
+          console.log("Service Details Submitted:", serviceDetails);
+
+          // Redirect to a confirmation or summary page
+          window.location.href = "confirmation.html";
+        });
+      };
+    </script>
+  </body>
+</html>
